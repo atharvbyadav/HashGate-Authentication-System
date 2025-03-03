@@ -12,6 +12,8 @@ The **HashGate Authentication System** is a secure, file-based user authenticati
 
 This system ensures that user credentials are stored securely using hashing techniques and provides a basic but effective local authentication mechanism.
 
+🚀 **Note:** This program is just a part of a bigger project I am working on. It serves as the **front-end login system** for a larger application currently under development.
+
 ## 🚀 Features
 
 - **SHA-256 Hashing**: Ensures passwords are stored securely.
@@ -77,12 +79,6 @@ g++ authentication.cpp -o hashgate.exe -lssl -lcrypto
 - **File Storage**:
   - `root.dat`: Contains the hashed root password.
   - `users.dat`: Stores user credentials in `username:hashed_password` format.
-
-## 🌟 Future Improvements
-
-- Implement user roles (admin/user differentiation).
-- Add brute-force protection mechanisms.
-- Improve error handling and logging.
 
 ## 📜 License
 
