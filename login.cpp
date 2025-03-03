@@ -10,14 +10,6 @@ using namespace std;
 #define ROOT_FILE "root.dat"
 #define USERS_FILE "users.dat"
 
-// Simple XOR encryption (for reversible encryption)
-string encryptDecrypt(string data, char key) {
-    for (size_t i = 0; i < data.size(); i++) {
-        data[i] ^= key;
-    }
-    return data;
-}
-
 // Hashing function using SHA-256
 string sha256(const string &str) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
@@ -29,24 +21,21 @@ string sha256(const string &str) {
     return ss.str();
 }
 
-// Check if the root password exists
 bool rootExists() {
     ifstream file(ROOT_FILE);
     return file.good();
 }
 
-// Create the root password (only on first launch)
 void createRootPassword() {
     string rootPassword;
     cout << "No root password found. Set up a root password (cannot be changed later): ";
     cin >> rootPassword;
     ofstream file(ROOT_FILE);
-    file << sha256(rootPassword);  // Store hashed root password
+    file << sha256(rootPassword);
     file.close();
     cout << "Root password set successfully!\n";
 }
 
-// Verify the root password
 bool verifyRootPassword(const string &inputPassword) {
     ifstream file(ROOT_FILE);
     string storedHash;
@@ -55,7 +44,6 @@ bool verifyRootPassword(const string &inputPassword) {
     return sha256(inputPassword) == storedHash;
 }
 
-// Check if a user exists
 bool userExists(const string &username) {
     ifstream file(USERS_FILE);
     string line;
@@ -67,7 +55,6 @@ bool userExists(const string &username) {
     return false;
 }
 
-// Add a new user (only with root password authentication)
 void addUser() {
     string rootPassword, username, password;
     cout << "Enter root password: ";
@@ -88,12 +75,53 @@ void addUser() {
     cin >> password;
 
     ofstream file(USERS_FILE, ios::app);
-    file << username << ":" << sha256(password) << endl;  // Store hashed password
+    file << username << ":" << sha256(password) << endl;
     file.close();
     cout << "User created successfully!\n";
 }
 
-// Login function
+void deleteUser() {
+    string rootPassword, username;
+    cout << "Enter root password: ";
+    cin >> rootPassword;
+    if (!verifyRootPassword(rootPassword)) {
+        cout << "Incorrect root password!\n";
+        return;
+    }
+
+    cout << "Enter username to delete: ";
+    cin >> username;
+    if (!userExists(username)) {
+        cout << "User does not exist!\n";
+        return;
+    }
+
+    cout << "Are you sure you want to delete user '" << username << "'? (yes/no): ";
+    string confirmation;
+    cin >> confirmation;
+    if (confirmation != "yes") {
+        cout << "User deletion canceled.\n";
+        return;
+    }
+
+    ifstream file(USERS_FILE);
+    ofstream tempFile("temp.dat");
+    string line;
+
+    while (getline(file, line)) {
+        if (line.find(username + ":") != 0) {
+            tempFile << line << "\n";
+        }
+    }
+
+    file.close();
+    tempFile.close();
+    remove(USERS_FILE);
+    rename("temp.dat", USERS_FILE);
+
+    cout << "User deleted successfully!\n";
+}
+
 void login() {
     string username, password;
     cout << "Username: ";
@@ -124,12 +152,13 @@ int main() {
 
     int choice;
     while (true) {
-        cout << "\n1. Login\n2. Create User (requires root password)\n3. Exit\nChoice: ";
+        cout << "\n1. Login\n2. Create User (requires root password)\n3. Delete User (requires root password)\n4. Exit\nChoice: ";
         cin >> choice;
         switch (choice) {
             case 1: login(); break;
             case 2: addUser(); break;
-            case 3: return 0;
+            case 3: deleteUser(); break;
+            case 4: return 0;
             default: cout << "Invalid choice!\n";
         }
     }
