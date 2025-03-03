@@ -4,11 +4,27 @@
 #include <vector>
 #include <iomanip>
 #include <openssl/sha.h>
+#include <termios.h>
+#include <unistd.h>
 
 using namespace std;
 
 #define ROOT_FILE "root.dat"
 #define USERS_FILE "users.dat"
+
+// Function to hide password input
+string getHiddenInput() {
+    string password;
+    struct termios oldt, newt;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~ECHO;
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    cin >> password;
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    cout << endl;
+    return password;
+}
 
 // Hashing function using SHA-256
 string sha256(const string &str) {
@@ -29,7 +45,7 @@ bool rootExists() {
 void createRootPassword() {
     string rootPassword;
     cout << "No root password found. Set up a root password (cannot be changed later): ";
-    cin >> rootPassword;
+    rootPassword = getHiddenInput();
     ofstream file(ROOT_FILE);
     file << sha256(rootPassword);
     file.close();
@@ -58,7 +74,7 @@ bool userExists(const string &username) {
 void addUser() {
     string rootPassword, username, password;
     cout << "Enter root password: ";
-    cin >> rootPassword;
+    rootPassword = getHiddenInput();
     if (!verifyRootPassword(rootPassword)) {
         cout << "Incorrect root password!\n";
         return;
@@ -72,7 +88,7 @@ void addUser() {
     }
 
     cout << "Enter new password: ";
-    cin >> password;
+    password = getHiddenInput();
 
     ofstream file(USERS_FILE, ios::app);
     file << username << ":" << sha256(password) << endl;
@@ -83,7 +99,7 @@ void addUser() {
 void deleteUser() {
     string rootPassword, username;
     cout << "Enter root password: ";
-    cin >> rootPassword;
+    rootPassword = getHiddenInput();
     if (!verifyRootPassword(rootPassword)) {
         cout << "Incorrect root password!\n";
         return;
@@ -127,7 +143,7 @@ void login() {
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
-    cin >> password;
+    password = getHiddenInput();
 
     ifstream file(USERS_FILE);
     string line;
