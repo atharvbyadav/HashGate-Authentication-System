@@ -1,5 +1,5 @@
 # 🔐 HashGate Authentication System (Stage 1)
----
+
 <p align="center">
   <a href="#">
     <img alt="Language|C++" src="https://img.shields.io/badge/Language-C++-blue?style=for-the-badge" />
@@ -17,6 +17,7 @@
     <img alt="STAGE|1" src="https://img.shields.io/badge/Project%20Stage-1--of--X-yellow?style=for-the-badge" />
   </a>
 </p>
+
 ---
 
 ## 📝 Overview
