@@ -103,9 +103,6 @@ g++ authentication.cpp -o hashgate.exe -lssl -lcrypto
 ## 📜 License
 
 This project is open-source and free to use under the MIT License.
-
----
-
 Contributions and suggestions are welcome! 🚀
 
 ## 🤝 Collaboration & Contributions
