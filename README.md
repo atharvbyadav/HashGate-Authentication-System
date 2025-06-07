@@ -1,5 +1,11 @@
 # 🔐 HashGate Authentication System (Stage 1)
 
+![Language](https://img.shields.io/badge/Language-C++-blue?style=for-the-badge)
+![Security](https://img.shields.io/badge/SHA--256-Hashing-critical?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows-informational?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
+![Stage](https://img.shields.io/badge/Project%20Stage-1--of--X-yellow?style=for-the-badge)
+
 ## 📝 Overview
 
 The **HashGate Authentication System** is a secure, file-based user authentication program written in C++. It provides a simple yet effective way to manage user authentication with the following features:
