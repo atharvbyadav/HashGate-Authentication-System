@@ -107,7 +107,7 @@ Contributions and suggestions are welcome! 🚀
 
 ## 🤝 Collaboration & Contributions
 
-I am open to collaboration if you have great ideas to implement! Feel free to **open issues**, **submit pull requests**, or discuss enhancements. Let's make **HashGate Authentication System** even better together! 💡🔧
+I am open to collaboration if you have great ideas to implement! Feel free to **open issues**, **submit pull requests** or discuss enhancements. Let's make **HashGate Authentication System** even better together! 💡🔧
 
 ## 📬 Contact
 
