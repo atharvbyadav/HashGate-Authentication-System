@@ -109,3 +109,11 @@ Contributions and suggestions are welcome! 🚀
 
 I am open to collaboration if you have great ideas to implement! Feel free to **open issues**, **submit pull requests**, or discuss enhancements. Let's make **HashGate Authentication System** even better together! 💡🔧
 
+## 📬 Contact
+
+- **👨‍💻 Author**: Atharv Yadav
+- **🌐 Website**: [atharvbyadav.github.io](https://atharvbyadav.github.io)
+- **🐙 GitHub**: [@atharvbyadav](https://github.com/atharvbyadav)
+- **📧 Email**: [uuwr5t1s@duck.com](mailto:uuwr5t1s@duck.com)  
+  _Looks suspicious? Good. It’s mine. The ducks work for me. 🦆💻_
+
